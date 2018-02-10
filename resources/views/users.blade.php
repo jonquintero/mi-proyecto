@@ -8,12 +8,18 @@
     <title>Listado de usuarios - Styde.net</title>
 </head>
 <body>
-<h1><?= e($title) ?></h1>
+    <h1>{{ $title }}</h1>
 
-<ul>
-    <?php foreach ($users as $user): ?>
-        <li><?= e($user) ?></li>
-    <?php endforeach; ?>
-</ul>
+    <hr>
+    @if(! empty($users))
+        <ul>
+            @foreach ($users as $user)
+                <li>{{ $user }}</li>
+            @endforeach
+        </ul>
+
+    @else
+        <p>No hay usuarios registrados</p>
+    @endif
 </body>
 </html>

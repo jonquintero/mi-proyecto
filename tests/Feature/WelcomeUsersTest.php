@@ -20,6 +20,6 @@ class WelcomeUsersTest extends TestCase
     {
         $this->get('saludo/jonathan')
             ->assertStatus(200)
-            ->assertSee('Bienvenido jon');
+            ->assertSee('Bienvenido jonathan');
     }
 }
