@@ -12,10 +12,17 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+       // $professions = DB::select('SELECT id FROM professions WHERE title = ?', ['Desarrollador Back-end']);
+
+        $professionId = DB::table('professions')
+            ->where('title','Desarrollador Back-end')
+            ->value('id');
+
         DB::table('users')->insert([
             'name' => 'Jonathan Quintero',
             'email' => 'jonquintero@hotmail.com',
             'password' => bcrypt('secret'),
+            'profession_id' =>  $professionId,
 
 
 
