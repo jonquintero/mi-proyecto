@@ -36,8 +36,13 @@ class User extends Authenticatable
         return static::where(Compact('email'))->first();
     }
 
+    public function profession()
+    {
+        return $this->belongsTo(Profession::class);
+    }
+
     public function isAdmin()
     {
-        return $this->email === 'jonquintero@hotmail.com';
+        return $this->is_admin;
     }
 }
