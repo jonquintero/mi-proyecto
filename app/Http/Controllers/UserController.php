@@ -22,9 +22,9 @@ class UserController extends Controller
        return view('users.index', compact('title', 'users'));
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
+        //$user = User::findOrFail($id);
 
        /* if($user == null)
         {
@@ -37,6 +37,11 @@ class UserController extends Controller
 
     public function create()
     {
-        return 'Crear nuevo usuario';
+        return view('users.create');
+    }
+
+    public function store()
+    {
+        return 'Procesando informacion..';
     }
 }
