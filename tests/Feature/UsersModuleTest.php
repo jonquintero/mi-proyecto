@@ -3,21 +3,22 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UsersModuleTest extends TestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
+   use DatabaseTransactions;
 
     /** @test */
     function it_show_the_users_list()
     {
-
         factory(User::class)->create([
             'name' => 'Joel',
-           ]);
+        ]);
 
         factory(User::class)->create([
             'name' => 'Ellie',
@@ -33,7 +34,7 @@ class UsersModuleTest extends TestCase
     /** @test */
     function it_show_a_default_message_if_the_users_list_is_empty()
     {
-       // DB::table('users')->truncate();
+        DB::table('users')->truncate();
 
         $this->get('/usuarios')
             ->assertStatus(200)
@@ -41,11 +42,15 @@ class UsersModuleTest extends TestCase
     }
 
     /** @test */
-    function it_loads_the_users_details_page()
+    function it_display_the_users_details()
     {
-        $this->get('/usuarios/5')
+        $user = factory(User::class)->create([
+            'name'  => 'Jonathan Quintero',
+        ]);
+
+        $this->get('/usuarios/'.$user->id)
             ->assertStatus(200)
-            ->assertSee('Mostrando detalle del usuario: 5');
+            ->assertSee('Jonathan Quintero');
     }
 
     /** @test */
