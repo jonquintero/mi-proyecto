@@ -43,7 +43,12 @@ class UserController extends Controller
     public function store()
     {
         //request se usa para obtener los datos del formulario
-        $data = request()->all();
+        $data = request()->validate([
+            'name' => 'required',
+        ],[
+            'name.required' => 'El campo nombre es obligatorio',
+        ]);
+
 
         User::create([
            'name' => $data['name'],
