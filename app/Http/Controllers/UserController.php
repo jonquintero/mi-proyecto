@@ -45,8 +45,11 @@ class UserController extends Controller
         //request se usa para obtener los datos del formulario
         $data = request()->validate([
             'name' => 'required',
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:6'],
         ],[
             'name.required' => 'El campo nombre es obligatorio',
+
         ]);
 
 
